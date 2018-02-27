@@ -53,4 +53,15 @@ public class Playlist {
     public String getVideoURL(int position){
         return SongPlaylist.get(position).getYoutubeURL();
     }
+    public void addSongToPlaylist(String songTitle, String Artist, String ArtistWikiURL, String SongWikiURL,String videoURL){
+        SongPlaylist.add(new Song(songTitle,Artist,ArtistWikiURL,SongWikiURL,videoURL));
+    }
+    public boolean removeSongFromPlaylist(int position){
+        try {
+            SongPlaylist.remove(position);
+        }catch (Exception e){
+            return false;
+        }
+        return true;
+    }
 }

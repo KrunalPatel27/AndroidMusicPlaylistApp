@@ -14,4 +14,9 @@ public class WebAppActivity extends AppCompatActivity {
         String URL = getIntent().getStringExtra("URL");
         webView.loadUrl(URL);
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

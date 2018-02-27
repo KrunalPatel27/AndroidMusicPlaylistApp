@@ -1,6 +1,7 @@
 package com.example.krupa.cs478project2;
 import android.app.Dialog;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,12 +10,14 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -40,22 +43,36 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_options, menu);
+
+        SubMenu listSongs = menu.addSubMenu("Remove");
+        menu.add("Exit");
+        for (int i=0; i< playlist.getPlaylistSize(); i++)
+            listSongs.add(0, i,0,playlist.getArtist(i));
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.new_song:
+        switch (item.getTitle().toString()){
+            case "New":
                 openAddSongDialog();
-                return true;
-            case R.id.remove_song:
-                return true;
-            case R.id.exit:
-                return true;
+            case "Remove":
+                break;
+            case "Exit":
+                exitApp();
             default:
-            return super.onOptionsItemSelected(item);
+                if( playlist.removeSongFromPlaylist(item.getItemId()) ) {
+                    System.out.println("removesdfsdfsdfsdfwewfe");
+                    System.out.println(playlist.getPlaylistSize());
+                    break;
+                }
+                else
+                    return super.onOptionsItemSelected(item);
         }
+        invalidateOptionsMenu();
+        playlistView.setAdapter(adapter);
+
+        return  true;
     }
 
     @Override
@@ -108,20 +125,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String sTitle, sArtist, sSongWikiURL, sArtistWikiURL, sVideoURL;
+
                 sTitle = Title.getText().toString();
                 sArtist = Artist.getText().toString();
-                sSongWikiURL = SongWikiURL.getText().toString();
                 sArtistWikiURL = ArtistWikiURL.getText().toString();
+                sSongWikiURL = SongWikiURL.getText().toString();
                 sVideoURL = VideoURL.getText().toString();
 
-                if(sTitle != null && sArtist != null && sSongWikiURL != null
-                        && sArtistWikiURL != null && sVideoURL != null){
+                if(sTitle.equals("") || sArtist.equals("") || sSongWikiURL.equals("")
+                        || sArtistWikiURL.equals("") || sVideoURL.equals("")){
+                    Toast.makeText(getActivity(), "Missing Details!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    playlist.addSongToPlaylist(sTitle,sArtist,sArtistWikiURL, sSongWikiURL, sVideoURL);
+                    invalidateOptionsMenu();
+                    dialog.hide();
 
                 }
+
+            }
+        });
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 dialog.hide();
             }
         });
         dialog.show();
+    }
+
+    public void removeSong(){
+
+    }
+    private void exitApp(){
+        finish();
+    }
+    private Context getActivity(){
+        return this;
     }
 
     private void setInitialPlaylist(){

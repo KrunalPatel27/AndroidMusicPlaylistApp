@@ -22,7 +22,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="4dp"
-        android:hint="VideoURL" />
+        android:hint="Song Title" />
 
     <EditText
         android:id="@+id/Artist"
@@ -32,7 +32,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="4dp"
-        android:hint="VideoURL" />
+        android:hint="Artist/Band" />
 
     <EditText
         android:id="@+id/SongWiki"
@@ -42,8 +42,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="4dp"
-        android:hint="VideoURL"
-        android:inputType="textUri" />
+        android:hint="Song Wiki"/>
 
     <EditText
         android:id="@+id/ArtistWiki"
@@ -53,8 +52,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="4dp"
-        android:hint="Song/Band Wiki"
-        android:inputType="textUri" />
+        android:hint="Artist/Band Wiki"/>
 
     <EditText
         android:id="@+id/VideoURL"
@@ -64,8 +62,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="4dp"
-        android:hint="Video URL"
-        android:inputType="textUri" />
+        android:hint="Video URL" />
 
     <LinearLayout
         android:layout_width="match_parent"
