@@ -16,7 +16,9 @@ public class WebAppActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    protected void onResume() {
+        super.onResume();
         finish();
     }
+
 }

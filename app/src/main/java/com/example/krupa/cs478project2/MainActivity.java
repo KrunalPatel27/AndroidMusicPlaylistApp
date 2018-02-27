@@ -37,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MyAdapter(this, playlist);
         playlistView.setAdapter(adapter);
         registerForContextMenu(playlistView);
+        playlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), WebAppActivity.class);
+                intent.putExtra("URL", playlist.getVideoURL(position));
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -47,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         SubMenu listSongs = menu.addSubMenu("Remove");
         menu.add("Exit");
         for (int i=0; i< playlist.getPlaylistSize(); i++)
-            listSongs.add(0, i,0,playlist.getArtist(i));
+            listSongs.add(0, i,0,playlist.getTitle(i));
         return true;
     }
 
@@ -56,23 +64,23 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getTitle().toString()){
             case "New":
                 openAddSongDialog();
+                break;
             case "Remove":
                 break;
             case "Exit":
                 exitApp();
+                break;
             default:
                 if( playlist.removeSongFromPlaylist(item.getItemId()) ) {
-                    System.out.println("removesdfsdfsdfsdfwewfe");
-                    System.out.println(playlist.getPlaylistSize());
                     break;
                 }
                 else
                     return super.onOptionsItemSelected(item);
         }
         invalidateOptionsMenu();
-        playlistView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
-        return  true;
+        return true;
     }
 
     @Override
@@ -139,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     playlist.addSongToPlaylist(sTitle,sArtist,sArtistWikiURL, sSongWikiURL, sVideoURL);
                     invalidateOptionsMenu();
+                    adapter.notifyDataSetChanged();
+
                     dialog.hide();
 
                 }
@@ -154,11 +164,8 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void removeSong(){
-
-    }
     private void exitApp(){
-        finish();
+        finishAndRemoveTask();
     }
     private Context getActivity(){
         return this;

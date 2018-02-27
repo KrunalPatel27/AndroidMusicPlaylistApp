@@ -31,6 +31,16 @@ public class Playlist {
                         "https://en.wikipedia.org/wiki/Alan_Walker_(music_producer)",
                         "https://en.wikipedia.org/wiki/Alone_(Alan_Walker_song)",
                         "https://www.youtube.com/watch?v=1-xGerv5FOk&index=24&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVMBAkqJT_sMKQ"));
+        SongPlaylist.add(new Song("X Gon' Give It to Ya",
+                        "DMX",
+                        "https://en.wikipedia.org/wiki/DMX_(rapper)%22",
+                        "https://en.wikipedia.org/wiki/X_Gon%27_Give_It_to_Ya",
+                        "https://www.youtube.com/watch?v=fGx6K90TmCI"));
+        SongPlaylist.add(new Song("If I Had a Heart",
+                        "Fever Ray",
+                        "https://en.wikipedia.org/wiki/Karin_Dreijer%22",
+                        "https://en.wikipedia.org/wiki/If_I_Had_a_Heart",
+                        "https://www.youtube.com/watch?v=EBAzlNJonO8"));
     }
     public int getPlaylistSize(){
         return SongPlaylist.size();
