@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="60dp"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:id="@+id/Title"
+        android:textSize="22sp"
+        android:text="ASDdf"
+        android:layout_marginLeft="5dp"
+        android:textColor="#FF5722"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:id="@+id/Artist"
+        android:textSize="16sp"
+        android:text="ASddfd"
+        android:layout_marginLeft="10dp"
+        android:textColor="#212121"
+        android:textStyle="italic"/>
+</LinearLayout>
